@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Loading from "./loading";
 
 interface VehicleMake {
   MakeId: number;
@@ -38,6 +39,10 @@ export default function Home() {
   }, []);
 
   const isNextDisabled = !selectedMake || !selectedYear;
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <main className="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
