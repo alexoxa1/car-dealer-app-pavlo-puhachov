@@ -59,12 +59,15 @@ async function VehicleList({ makeId, year }: { makeId: string; year: string }) {
   );
 }
 
-export default async function ResultPage({
-  params,
-}: {
-  params: { makeId: string; year: string };
-}) {
-  const { makeId, year } = await Promise.resolve(params);
+type PageProps = {
+  params: Promise<{
+    makeId: string;
+    year: string;
+  }>;
+};
+
+export default async function ResultPage({ params }: PageProps) {
+  const { makeId, year } = await params;
 
   return (
     <main className="min-h-screen p-8 bg-gray-50 dark:bg-gray-900">
