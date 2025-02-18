@@ -46,7 +46,7 @@ export default function Home() {
           Car Dealer
         </h1>
 
-        <div className="space-y-6">
+        <div className="space-y-12">
           <div>
             <label
               htmlFor="make"
@@ -92,19 +92,21 @@ export default function Home() {
             </select>
           </div>
 
-          <Link
-            href={
-              isNextDisabled ? "#" : `/result/${selectedMake}/${selectedYear}`
-            }
-            className={`w-full text-center py-2 px-4 rounded-md ${
-              isNextDisabled
-                ? "bg-gray-300 dark:bg-gray-600 cursor-not-allowed text-gray-500 dark:text-gray-400"
-                : "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
-            }`}
-            onClick={(e) => isNextDisabled && e.preventDefault()}
-          >
-            Next
-          </Link>
+          <div className="pt-4">
+            <Link
+              href={
+                isNextDisabled ? "#" : `/result/${selectedMake}/${selectedYear}`
+              }
+              className={`w-full text-center py-3 px-4 rounded-md ${
+                isNextDisabled
+                  ? "bg-gray-300 dark:bg-gray-600 cursor-not-allowed text-gray-500 dark:text-gray-400"
+                  : "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
+              }`}
+              onClick={(e) => isNextDisabled && e.preventDefault()}
+            >
+              Next
+            </Link>
+          </div>
         </div>
       </div>
     </main>
