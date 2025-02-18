@@ -40,21 +40,23 @@ export default function Home() {
   const isNextDisabled = !selectedMake || !selectedYear;
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-center mb-8">Car Dealer</h1>
+    <main className="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+          Car Dealer
+        </h1>
 
         <div className="space-y-6">
           <div>
             <label
               htmlFor="make"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               Select Vehicle Make
             </label>
             <select
               id="make"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               value={selectedMake}
               onChange={(e) => setSelectedMake(e.target.value)}
               disabled={isLoading}
@@ -71,13 +73,13 @@ export default function Home() {
           <div>
             <label
               htmlFor="year"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               Select Model Year
             </label>
             <select
               id="year"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
             >
@@ -96,8 +98,8 @@ export default function Home() {
             }
             className={`w-full text-center py-2 px-4 rounded-md ${
               isNextDisabled
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700 text-white"
+                ? "bg-gray-300 dark:bg-gray-600 cursor-not-allowed text-gray-500 dark:text-gray-400"
+                : "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
             }`}
             onClick={(e) => isNextDisabled && e.preventDefault()}
           >

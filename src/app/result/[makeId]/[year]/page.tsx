@@ -33,7 +33,7 @@ async function VehicleList({ makeId, year }: { makeId: string; year: string }) {
   if (!vehicles.length) {
     return (
       <div className="text-center">
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           No vehicles found for the selected criteria.
         </p>
       </div>
@@ -45,10 +45,14 @@ async function VehicleList({ makeId, year }: { makeId: string; year: string }) {
       {vehicles.map((vehicle) => (
         <div
           key={vehicle.Model_ID}
-          className="p-4 border rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow"
+          className="p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-800 dark:border-gray-700 hover:shadow-md transition-shadow"
         >
-          <h3 className="font-semibold text-lg">{vehicle.Model_Name}</h3>
-          <p className="text-gray-600">{vehicle.Make_Name}</p>
+          <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+            {vehicle.Model_Name}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300">
+            {vehicle.Make_Name}
+          </p>
         </div>
       ))}
     </div>
@@ -63,13 +67,15 @@ export default async function ResultPage({
   const { makeId, year } = await Promise.resolve(params);
 
   return (
-    <main className="min-h-screen p-8">
+    <main className="min-h-screen p-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Vehicles from {year}</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Vehicles from {year}
+          </h1>
           <Link
             href="/"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-md transition-colors"
           >
             Back to Search
           </Link>
@@ -78,7 +84,9 @@ export default async function ResultPage({
         <Suspense
           fallback={
             <div className="flex justify-center items-center min-h-[200px]">
-              <div className="text-gray-600">Loading vehicles...</div>
+              <div className="text-gray-600 dark:text-gray-400">
+                Loading vehicles...
+              </div>
             </div>
           }
         >
