@@ -11,6 +11,8 @@ A Next.js application that allows users to filter and view vehicles by make and 
 - TypeScript support
 - Loading states with React Suspense
 
+https://github.com/user-attachments/assets/46d04311-3188-4b9d-bfc9-c4946dc2d1be
+
 ## Prerequisites
 
 - Node.js 16.8 or later
