@@ -1,0 +1,90 @@
+import Link from "next/link";
+import { Suspense } from "react";
+
+interface Vehicle {
+  Make_ID: number;
+  Make_Name: string;
+  Model_ID: number;
+  Model_Name: string;
+}
+
+async function getVehicles(makeId: string, year: string): Promise<Vehicle[]> {
+  const res = await fetch(
+    `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/${makeId}/modelyear/${year}?format=json`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch vehicles");
+  }
+
+  const data = await res.json();
+  return data.Results;
+}
+
+export async function generateStaticParams() {
+  // This is a placeholder implementation since we can't predict all possible combinations
+  // In a real app, you might want to limit this to popular makes/years
+  return [];
+}
+
+async function VehicleList({ makeId, year }: { makeId: string; year: string }) {
+  const vehicles = await getVehicles(makeId, year);
+
+  if (!vehicles.length) {
+    return (
+      <div className="text-center">
+        <p className="text-gray-600">
+          No vehicles found for the selected criteria.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {vehicles.map((vehicle) => (
+        <div
+          key={vehicle.Model_ID}
+          className="p-4 border rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow"
+        >
+          <h3 className="font-semibold text-lg">{vehicle.Model_Name}</h3>
+          <p className="text-gray-600">{vehicle.Make_Name}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default async function ResultPage({
+  params,
+}: {
+  params: { makeId: string; year: string };
+}) {
+  const { makeId, year } = await Promise.resolve(params);
+
+  return (
+    <main className="min-h-screen p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Vehicles from {year}</h1>
+          <Link
+            href="/"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Back to Search
+          </Link>
+        </div>
+
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center min-h-[200px]">
+              <div className="text-gray-600">Loading vehicles...</div>
+            </div>
+          }
+        >
+          <VehicleList makeId={makeId} year={year} />
+        </Suspense>
+      </div>
+    </main>
+  );
+}
